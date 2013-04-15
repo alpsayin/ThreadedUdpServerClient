@@ -128,7 +128,7 @@ private class UDPListener extends Thread
                 }
                 catch(SocketTimeoutException ste)
                 {
-                    
+
                 }
                 catch(Exception e)
                 {
@@ -189,6 +189,7 @@ private class UserInputThread extends Thread
             String line = scan.nextLine();
             if(line.equalsIgnoreCase("exit"))
             {
+                System.out.println("Shutting down server...");
                 server.setRun(false);
                 myRun = false;
             }
