@@ -128,14 +128,10 @@ public class Main
             {
                 DatagramSocket clientSocket = new DatagramSocket();
                 InetAddress IPAddress = InetAddress.getByName(LOCAL_BROADCAST_ADDRESS);
-                byte[] sendData = new byte[1024];
-                byte[] receiveData = new byte[1024];
-                String sentence = new String(message);
-                sendData = sentence.getBytes();
-                DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
+                DatagramPacket sendPacket = new DatagramPacket(message.getBytes(), message.getBytes().length, IPAddress, port);
                 clientSocket.send(sendPacket);
                 String modifiedSentence = new String(sendPacket.getData());
-                System.out.println("FROM SERVER:" + modifiedSentence);
+                System.out.println("FROM SERVER:" + modifiedSentence + " " + sendPacket.getLength() + " bytes");
                 clientSocket.close();
             }
             catch(Exception e)
