@@ -93,12 +93,11 @@ public class Main
                         serverSocket.receive(receivePacket);
                         String sentence = new String( receivePacket.getData());
                         System.out.println("RECEIVED: " + receivePacket.getLength() + " bytes");
-			printAsciiHex(receivePacket.getData(), receivePacket.getLength());
+                        printAsciiHex(receivePacket.getData(), receivePacket.getLength());
                         InetAddress IPAddress = receivePacket.getAddress();
-                        int port = receivePacket.getPort();
                         String capitalizedSentence = sentence.toUpperCase();
-                        UDPSender replier = new UDPSender(PORT, capitalizedSentence);
-                        replier.start();
+                        //UDPSender replier = new UDPSender(PORT, capitalizedSentence);
+                        //replier.start();
                     }
                     catch(Exception e)
                     {
