@@ -12,9 +12,8 @@ import java.util.Scanner;
 
 public class Main
 {
-    public static final int COLUMN_SIZE = 16;
-    public static final String LOCAL_BROADCAST_ADDRESS = "172.18.114.255";
-    
+    private static final int COLUMN_SIZE = 16;
+    private static String LOCAL_BROADCAST_ADDRESS = "172.18.114.255";
     private static int PORT = 9875;
     private UDPListener udpListener;
     private UserInputThread uiThread;
@@ -31,6 +30,29 @@ public class Main
      {
         System.err.println(e.getMessage());
         System.err.println("Using default port number: "+PORT);
+    }
+    try
+    {
+        InetAddress localHost = Inet4Address.getLocalHost();
+        NetworkInterface networkInterface = NetworkInterface.getByInetAddress(localHost);
+        int prefixLength = networkInterface.getInterfaceAddresses().get(0).getNetworkPrefixLength();
+        if(prefixLength == -1)
+            prefixLength = 24;
+        byte[] raw_address = localHost.getAddress();
+        switch(prefixLength)
+        {
+            case 0: raw_address[0] = (byte)0xFF;
+            case 8: raw_address[1] = (byte)0xFF;
+            case 16: raw_address[2] = (byte)0xFF;
+            case 24: raw_address[3] = (byte)0xFF;
+        }
+        LOCAL_BROADCAST_ADDRESS = Inet4Address.getByAddress(raw_address).getHostAddress();
+        System.out.println("Local broadcast address is: "+LOCAL_BROADCAST_ADDRESS);
+        //System.out.printf("%d.%d.%d.%d\n", (int)raw_address[0] & 0xFF, (int)raw_address[1] & 0xFF, (int)raw_address[2] & 0xFF, (int)raw_address[3] & 0xFF );
+    }
+    catch(Exception e)
+    {
+        e.printStackTrace();
     }
     Main m = new Main(PORT);
     m.startThreads();
