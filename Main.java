@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class Main
 {
     public static final int COLUMN_SIZE = 16;
-    public static final String LOCAL_BROADCAST_ADDRESS = "192.168.2.255";
+    public static final String LOCAL_BROADCAST_ADDRESS = "172.18.114.255";
     
     private static int PORT = 9875;
     private UDPListener udpListener;
