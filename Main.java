@@ -20,18 +20,18 @@ public class Main
     private UserInputThread uiThread;
     public static void main(String args[])
     {
-	if(args.length >= 1)
-	   try
-	       {
-		   PORT = Integer.parseInt(args[0]);
-		   if(PORT >= 65536 || PORT <= 0)
-		       throw new Exception("Port Error: "+ args[0]);
-	       }
-	   catch(Exception e)
-	       {
-		   System.err.println(e.getMessage());
-		   System.err.println("Using default port number: "+PORT);
-	       }
+    if(args.length >= 1)
+       try
+       {
+           PORT = Integer.parseInt(args[0]);
+           if(PORT >= 65536 || PORT <= 0)
+               throw new Exception("Port Error: "+ args[0]);
+       }
+       catch(Exception e)
+       {
+            System.err.println(e.getMessage());
+            System.err.println("Using default port number: "+PORT);
+       }
         Main m = new Main(PORT);
         m.startThreads();
     }
