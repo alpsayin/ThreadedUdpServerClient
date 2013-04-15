@@ -172,52 +172,52 @@ public class Main
     {
         int i,j;
         for(i = 0; i<COLUMN_SIZE; i++)
-            {
-                System.out.printf("%02x", i & (0xFF));
-                if(i%2==1 && i!=0)
-                    System.out.printf(" ");
-            }
+        {
+            System.out.printf("%02x", i & (0xFF));
+            if(i%2==1 && i!=0)
+                System.out.printf(" ");
+        }
         System.out.println();
         for (i = 0; i<COLUMN_SIZE; i++)
-            {
-                System.out.printf("--", i & (0xFF));
-                if(i%2==1 && i!=0)
-                    System.out.printf("-");
-            }
+        {
+            System.out.printf("--", i & (0xFF));
+            if(i%2==1 && i!=0)
+                System.out.printf("-");
+        }
         System.out.println();
         for(i = 1; i <= nread; i++)
+        {
+            System.out.printf("%02x", buffer[i - 1] & (0xFF));
+            if(i%2==0 && i!=0)
+                System.out.printf(" ");
+            if(i%COLUMN_SIZE == 0)
             {
-                System.out.printf("%02x", buffer[i - 1] & (0xFF));
-                if(i%2==0 && i!=0)
-                    System.out.printf(" ");
-                if(i%COLUMN_SIZE == 0)
+                System.out.print('\t');
+                for(j=i-COLUMN_SIZE; j<i; j++)
                     {
-                        System.out.print('\t');
-                        for(j=i-COLUMN_SIZE; j<i; j++)
-                            {
-                                if(buffer[j] >= 32 && buffer[j] <= 126)
-                                    System.out.print(buffer[j]);
-                                else
-                                    System.out.print('.');
-                            }
-                        System.out.print('\n');
+                        if(buffer[j] >= 32 && buffer[j] <= 126)
+                            System.out.print((char)buffer[j]);
+                        else
+                            System.out.print('.');
                     }
-                else if(i==nread)
-                    {
-
-                        for(j=0; j<(COLUMN_SIZE-(nread%COLUMN_SIZE))*3; j++)
-                            System.out.print(' ');
-                        System.out.print('\t');
-                        for(j=(nread/COLUMN_SIZE)*COLUMN_SIZE; j<nread; j++)
-                            {
-                                if(buffer[j] >= 32 && buffer[j] <= 126)
-                                    System.out.print(buffer[j]);
-                                else
-                                    System.out.print('.');
-                            }
-                        System.out.print('\n');
-                    }
+                System.out.print('\n');
             }
+            else if(i==nread)
+            {
+
+                for(j=0; j<(COLUMN_SIZE-(nread%COLUMN_SIZE))*3; j++)
+                    System.out.print(' ');
+                System.out.print('\t');
+                for(j=(nread/COLUMN_SIZE)*COLUMN_SIZE; j<nread; j++)
+                {
+                    if(buffer[j] >= 32 && buffer[j] <= 126)
+                        System.out.print((char)buffer[j]);
+                    else
+                        System.out.print(".");
+                }
+                System.out.print('\n');
+            }
+        }
         System.out.print('\n');
     }
 }
