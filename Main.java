@@ -34,7 +34,11 @@ public class Main
     try
     {
         InetAddress localHost = Inet4Address.getLocalHost();
-        NetworkInterface networkInterface = NetworkInterface.getByInetAddress(localHost);
+        NetworkInterface networkInterface = NetworkInterface.getByName("wlan0"); //linux
+        if(networkInterface == null)
+            networkInterface = NetworkInterface.getByName("en1"); //mac os x
+        if(networkInterface == null)
+            networkInterface = NetworkInterface.getByInetAddress(localHost);
         int prefixLength = networkInterface.getInterfaceAddresses().get(0).getNetworkPrefixLength();
         if(prefixLength == -1)
             prefixLength = 24;
