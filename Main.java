@@ -107,6 +107,7 @@ private class UDPListener extends Thread
         try
         {  
             DatagramSocket serverSocket = new DatagramSocket(port);
+            serverSocket.setSoTimeout(3000);
             setStatus(3);
             byte[] receiveData = new byte[1024];
             byte[] sendData = new byte[1024];
@@ -124,6 +125,10 @@ private class UDPListener extends Thread
                     String capitalizedSentence = sentence.toUpperCase();
                         //UDPSender replier = new UDPSender(PORT, capitalizedSentence);
                         //replier.start();
+                }
+                catch(SocketTimeoutException ste)
+                {
+                    
                 }
                 catch(Exception e)
                 {
