@@ -5,4 +5,6 @@ comment1.params=port
 comment1.target=Main(int)
 comment2.params=
 comment2.target=void\ startThreads()
-numComments=3
+comment3.params=buffer\ nread
+comment3.target=void\ printAsciiHex(byte[],\ int)
+numComments=4
