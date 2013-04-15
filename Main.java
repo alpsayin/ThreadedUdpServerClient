@@ -155,15 +155,21 @@ public class Main
         }
         public void run()
         {
-            System.out.println("waiting input");
+            System.out.println("waiting input (exit)");
             Scanner scan = new Scanner(System.in);
             while(myRun)
             {
-                System.out.println("waiting input");
-                if(scan.nextLine().equalsIgnoreCase("exit"))
+                System.out.println("waiting input (exit)");
+                String line = scan.nextLine();
+                if(line.equalsIgnoreCase("exit"))
                 {
                     server.setRun(false);
                     myRun = false;
+                }
+                else
+                {
+                    UDPSender sender = new UDPSender(PORT, line);
+                    sender.start();
                 }
             }
         }
